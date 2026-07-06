@@ -152,8 +152,8 @@
             </div>
 
             <div class="space-y-3">
-                <button onclick="accessPrivateDocument()" class="flex items-center space-x-3 p-3 bg-amber-50 text-amber-800 hover:bg-amber-100/80 rounded-xl transition font-medium text-sm w-full text-left">
-                    <span class="w-8 h-8 bg-amber-500 text-white rounded-lg flex items-center justify-center"><i class="fa-solid fa-file-shield text-xs"></i></span>
+                <button onclick="accessPrivateDocument()" class="flex items-center space-x-3 p-3 bg-blue-50 text-blue-800 hover:bg-blue-100/80 rounded-xl transition font-medium text-sm w-full text-left">
+                    <span class="w-8 h-8 bg-blue-600 text-white rounded-lg flex items-center justify-center"><i class="fa-solid fa-file-shield text-xs"></i></span>
                     <span>เอกสารส่วนตัว</span>
                 </button>
 
@@ -477,6 +477,23 @@
     </div>
 </div>
 
+<div id="modal-private-doc" class="fixed inset-0 bg-slate-950/40 backdrop-blur-xs z-50 hidden opacity-0 transition-opacity duration-300 flex justify-center items-center px-4">
+    <div class="bg-white rounded-3xl p-6 max-w-sm w-full shadow-2xl space-y-5 text-center transform scale-95 transition-transform duration-300 border border-blue-50">
+        <div class="w-14 h-14 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mx-auto text-2xl animate-pulse">
+            <i class="fa-solid fa-shield-halved"></i>
+        </div>
+        <div class="space-y-2">
+            <h3 class="font-bold text-slate-800 text-base">ระบบรักษาความปลอดภัยข้อมูล</h3>
+            <p class="text-xs text-slate-600 leading-relaxed font-medium">
+                กรุณารอ 5-10 นาที เพื่อดูเอกสาร หรือ หากท่านใช้ <span class="text-blue-600 font-bold">Mahidol.ac.th</span> สามารถเข้าดูได้ทันที ขออภัยในความไม่สะดวกครับ ☺️
+            </p>
+        </div>
+        <button onclick="redirectToDrive()" class="w-full py-3 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white text-xs font-semibold rounded-xl transition-all shadow-md shadow-blue-100 tracking-wide">
+            รับทราบและดำเนินการต่อ
+        </button>
+    </div>
+</div>
+
 <footer class="bg-white border-t border-slate-100 py-6 mt-16 text-center text-[11px] font-medium text-slate-400 tracking-wider">
     จัดทำโดย netirat@2026 PN · สงวนลิขสิทธิ์ข้อมูลตามนโยบายองค์กร
 </footer>
@@ -574,15 +591,12 @@
 
     // ฟังก์ชันสำหรับเมนู "เอกสารส่วนตัว"
     function accessPrivateDocument() {
-        // ปิดแถบเมนูก่อนเพื่อความสวยงาม
-        toggleQuickMenu(false);
-        
-        // ดีเลย์เล็กน้อยเพื่อให้เมนูปิดเสร็จแล้วค่อยแสดง Pop-up alert
-        setTimeout(() => {
-            alert("ขออภัยด้วยครับ กรุณาใช้ Gmail ของ องค์กร Mahidol.ac.th เท่านั้นเพื่อดู เอกสาร เพื่อความปลอดภัย ของข้อมูล ส่วนบุคคล");
-            // นำทางไปยัง Google Drive ลิงก์ที่กำหนดไว้
-            window.location.href = "https://drive.google.com/drive/folders/1vscA8M13Koh3zu_OLNHTZ4zoHv6X3hLa";
-        }, 350);
+        openModal('private-doc');
+    }
+
+    // นำทางไปยัง Google Drive ลิงก์เอกสารส่วนตัว
+    function redirectToDrive() {
+        window.location.href = "https://drive.google.com/drive/folders/1vscA8M13Koh3zu_OLNHTZ4zoHv6X3hLa";
     }
 
     // ฟังก์ชันยิงพลุ
