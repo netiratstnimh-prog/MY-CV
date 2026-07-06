@@ -4,488 +4,629 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>พอร์ตโฟลิโอ & CV - เนติราช นิ่มเจริญวัฒนกุล</title>
-    
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Prompt:wght=200;300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <style>
-        body {
-            font-family: 'Prompt', 'Inter', sans-serif;
-            background-color: #f8fafc;
-            scroll-behavior: smooth;
-        }
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
-        /* คลาสลูกเล่น Custom Animation */
-        @keyframes pulse-green {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(34, 197, 94, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
-        }
-        .status-pulse {
-            animation: pulse-green 2s infinite;
-        }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-        @keyframes ekg-flow {
-            0% { stroke-dashoffset: 1200; }
-            100% { stroke-dashoffset: 0; }
-        }
-        .ekg-svg-line {
-            stroke-dasharray: 1200;
-            stroke-dashoffset: 1200;
-            animation: ekg-flow 3.5s linear infinite;
-        }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Prompt:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
 
-        /* Custom Blur Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #f1f5f9;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8;
-        }
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-        .glass-card {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(241, 245, 249, 1);
-        }
-    </style>
+<style>
+    body {
+        font-family: 'Prompt', 'Inter', sans-serif;
+        background-color: #f8fafc;
+        scroll-behavior: smooth;
+    }
+
+    /* Custom Animations */
+    @keyframes pulse-green {
+        0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+        70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(34, 197, 94, 0); }
+        100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+    }
+    .status-pulse {
+        animation: pulse-green 2s infinite;
+    }
+
+    @keyframes ekg-flow {
+        0% { stroke-dashoffset: 1200; }
+        100% { stroke-dashoffset: 0; }
+    }
+    .ekg-svg-line {
+        stroke-dasharray: 1200;
+        stroke-dashoffset: 1200;
+        animation: ekg-flow 3.5s linear infinite;
+    }
+
+    /* ลูกเล่นกระดิ่งสั่น / เบอร์โทรศัพท์ */
+    @keyframes bell-ring {
+        0%, 100% { transform: rotate(0); }
+        5%, 15%, 25% { transform: rotate(8deg); }
+        10%, 20%, 30% { transform: rotate(-8deg); }
+        35% { transform: rotate(4deg); }
+        40% { transform: rotate(-4deg); }
+        45% { transform: rotate(2deg); }
+        50% { transform: rotate(-2deg); }
+        55% { transform: rotate(0); }
+    }
+    .ring-animation {
+        animation: bell-ring 2.5s infinite;
+        inline-size: max-content;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+        background: #f1f5f9;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+    }
+
+    .glass-card {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(241, 245, 249, 1);
+    }
+</style>
 </head>
 <body class="text-slate-900 antialiased selection:bg-sky-100 selection:text-sky-900">
 
-    <div id="splash-screen" class="fixed inset-0 bg-white z-50 flex flex-col justify-center items-center transition-all duration-700 ease-in-out">
-        <div class="max-w-md w-full px-6 text-center space-y-8">
-            <div id="splash-icon-box" class="mx-auto w-24 h-24 bg-sky-50 rounded-3xl flex items-center justify-center border border-sky-100 text-sky-500 shadow-sm transition-transform duration-500">
-                <i class="fa-solid fa-house-medical text-4xl animate-pulse"></i>
+<div id="splash-screen" class="fixed inset-0 bg-white z-50 flex flex-col justify-center items-center transition-all duration-700 ease-in-out">
+    <div class="max-w-md w-full px-6 text-center space-y-8">
+        <div id="splash-icon-box" class="mx-auto w-24 h-24 bg-sky-50 rounded-3xl flex items-center justify-center border border-sky-100 text-sky-500 shadow-sm transition-transform duration-500">
+            <i class="fa-solid fa-house-medical text-4xl animate-pulse"></i>
+        </div>
+
+        <div id="splash-text-1" class="space-y-2 transition-all duration-500">
+            <h2 class="text-xs uppercase tracking-widest font-bold text-sky-500">Medical Professional Profile</h2>
+            <h1 class="text-2xl font-bold text-slate-800">CV - NETIRAT</h1>
+        </div>
+
+        <div id="splash-text-2" class="text-slate-400 text-sm font-light opacity-0 transition-all duration-500">
+            กรุณารอสักครู่ครับ 😊
+        </div>
+
+        <div id="splash-ekg-box" class="hidden flex flex-col items-center space-y-3 transform scale-95 transition-all duration-500">
+            <svg class="w-72 h-16" viewBox="0 0 300 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path class="ekg-svg-line" d="M0,50 L60,50 L75,20 L85,80 L95,45 L100,55 L105,50 L180,50 L195,10 L205,90 L215,40 L220,55 L225,50 L300,50" stroke="#0ea5e9" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="text-xs font-medium text-slate-500 bg-slate-100 px-3 py-1 rounded-full">
+                พาพี่HR สุดน่ารักไปยังหน้า ถัดไปค้าบ 🤍
+            </span>
+        </div>
+    </div>
+</div>
+
+<div id="guide-popup" class="fixed inset-0 bg-slate-900/40 backdrop-blur-xs z-40 hidden opacity-0 transition-opacity duration-500 flex justify-center items-center px-4">
+    <div class="bg-white rounded-3xl p-6 max-w-sm w-full shadow-2xl border border-slate-100 space-y-6 transform scale-95 transition-transform duration-500">
+        <div class="flex items-center space-x-3 text-sky-600">
+            <div class="w-10 h-10 bg-sky-50 rounded-xl flex items-center justify-center text-lg"><i class="fa-solid fa-circle-info"></i></div>
+            <h3 class="text-base font-bold text-slate-800">แนะนำการใช้งานเบื้องต้น</h3>
+        </div>
+        <div class="text-sm text-slate-500 space-y-3 leading-relaxed">
+            <p>ยินดีต้อนรับพี่ HR และผู้เข้าชมทุกท่านครับ! เว็บไซต์นี้ถูกออกแบบมาในสไตล์คลีนเพื่อรวบรวมข้อมูลของเนติราช:</p>
+            <ul class="space-y-2 list-disc list-inside text-xs pl-1">
+                <li><strong class="text-slate-700">แถบเมนู 3 ขีดด้านบน:</strong> สำหรับกดปุ่มติดต่อสื่อสารด่วน หรือเข้าชมลิงก์ภายนอก</li>
+                <li><strong class="text-slate-700">โมดูลข้อมูล:</strong> ท่านสามารถกดคลิกที่กล่องต่างๆ เพื่อเปิดดูรายละเอียดในรูปแบบป๊อปอัพโต้ตอบได้ครับ</li>
+            </ul>
+        </div>
+        <button onclick="closeGuide()" class="w-full py-3 bg-sky-500 hover:bg-sky-600 active:bg-sky-700 text-white font-medium rounded-xl text-sm transition-all shadow-sm shadow-sky-200">
+            รับทราบและเข้าสู่เว็บไซต์
+        </button>
+    </div>
+</div>
+
+<nav class="bg-white/90 backdrop-blur-md border-b border-slate-100 sticky top-0 z-30 px-4 py-3 flex justify-between items-center shadow-xs">
+    <div class="flex items-center space-x-3">
+        <div class="w-9 h-9 bg-gradient-to-br from-blue-900 to-indigo-950 rounded-xl flex items-center justify-center text-white text-[10px] font-bold shadow-inner">
+            MU
+        </div>
+        <div class="flex flex-col">
+            <span class="font-bold text-slate-800 text-sm tracking-wide">เนติราช นิ่มเจริญวัฒนกุล</span>
+            <span class="text-[11px] text-slate-400 font-medium">Practical Nurse · SIPN 74</span>
+        </div>
+    </div>
+    
+    <button onclick="toggleQuickMenu(true)" class="w-9 h-9 bg-slate-50 hover:bg-slate-100 rounded-xl flex items-center justify-center text-slate-600 transition-colors">
+        <i class="fa-solid fa-bars text-sm"></i>
+    </button>
+</nav>
+
+<div id="quick-menu" class="fixed inset-0 bg-slate-900/30 backdrop-blur-xs z-50 hidden transition-all duration-300">
+    <div class="bg-white w-full max-w-xs h-full p-6 shadow-2xl ml-auto flex flex-col justify-between transform translate-x-full transition-transform duration-300" id="quick-menu-content">
+        <div class="space-y-6">
+            <div class="flex justify-between items-center pb-4 border-b border-slate-100">
+                <h3 class="font-bold text-slate-700 text-sm">การติดต่อสื่อสารด่วน</h3>
+                <button onclick="toggleQuickMenu(false)" class="w-7 h-7 rounded-lg hover:bg-slate-100 text-slate-400 flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
             </div>
 
-            <div id="splash-text-1" class="space-y-2 transition-all duration-500">
-                <h2 class="text-xs uppercase tracking-widest font-bold text-sky-500">Medical Professional Profile</h2>
-                <h1 class="text-2xl font-bold text-slate-800">CV - NETIRAT</h1>
+            <div class="space-y-3">
+                <a href="tel:0635164271" class="ring-animation flex items-center space-x-3 p-3 bg-emerald-50 text-emerald-700 hover:bg-emerald-100/80 rounded-xl transition font-medium text-sm w-full">
+                    <span class="w-8 h-8 bg-emerald-500 text-white rounded-lg flex items-center justify-center"><i class="fa-solid fa-phone text-xs"></i></span>
+                    <span>โทรหาฉันตอนนี้ (063-5164271)</span>
+                </a>
+
+                <a href="https://line.me/ti/p/q_4F_2LD65" target="_blank" class="flex items-center space-x-3 p-3 bg-green-50 text-green-700 hover:bg-green-100/80 rounded-xl transition font-medium text-sm">
+                    <span class="w-8 h-8 bg-green-500 text-white rounded-lg flex items-center justify-center"><i class="fa-brands fa-line text-sm"></i></span>
+                    <span>ติดต่อผ่าน LINE</span>
+                </a>
+
+                <button onclick="toggleEmailDropdown()" class="w-full flex items-center justify-between p-3 bg-sky-50 text-sky-700 hover:bg-sky-100/80 rounded-xl transition font-medium text-sm text-left">
+                    <div class="flex items-center space-x-3">
+                        <span class="w-8 h-8 bg-sky-500 text-white rounded-lg flex items-center justify-center"><i class="fa-solid fa-envelope text-xs"></i></span>
+                        <span>ส่ง mail หาฉันตอนนี้</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-down text-xs text-sky-400" id="email-chevron"></i>
+                </button>
+
+                <div id="email-dropdown" class="hidden space-y-1.5 pl-11 transition-all duration-200">
+                    <a href="mailto:Work.netirat@gmail.com" class="block text-xs p-2.5 text-slate-600 hover:text-sky-600 rounded-lg hover:bg-slate-50 border-l-2 border-sky-300 break-all">
+                        <i class="fa-solid fa-briefcase mr-1 text-slate-400"></i> Work.netirat@gmail.com
+                    </a>
+                    <a href="mailto:netirat.nim@mahidol.ac.th" class="block text-xs p-2.5 text-slate-600 hover:text-sky-600 rounded-lg hover:bg-slate-50 border-l-2 border-sky-300 break-all">
+                        <i class="fa-solid fa-graduation-cap mr-1 text-slate-400"></i> netirat.nim@mahidol.ac.th
+                    </a>
+                </div>
             </div>
 
-            <div id="splash-text-2" class="text-slate-400 text-sm font-light opacity-0 transition-all duration-500">
-                กรุณารอสักครู่ครับ 😊
+            <div class="pt-4 border-t border-slate-100">
+                <button onclick="openModal('external-error')" class="w-full flex items-center space-x-3 p-3 bg-slate-50 text-slate-600 hover:bg-slate-100 rounded-xl transition font-medium text-sm text-left">
+                    <span class="w-8 h-8 bg-slate-400 text-white rounded-lg flex items-center justify-center"><i class="fa-solid fa-circle-ellipsis"></i></span>
+                    <span>รายละเอียดอื่นๆ</span>
+                </button>
+            </div>
+        </div>
+        
+        <div class="text-[11px] text-slate-400 border-t border-slate-100 pt-4 text-center">
+            ระบบจัดการข้อมูลสารสนเทศส่วนบุคคล · NETIRAT
+        </div>
+    </div>
+</div>
+
+<main class="max-w-4xl mx-auto px-4 py-8 space-y-6">
+
+    <section class="bg-white rounded-3xl p-6 border border-slate-100 shadow-xs relative overflow-hidden">
+        <div class="flex flex-col md:flex-row items-center md:items-start space-y-4 md:space-y-0 md:space-x-6">
+            <div class="w-20 h-20 bg-gradient-to-br from-sky-400 to-sky-600 text-white rounded-2xl flex items-center justify-center text-3xl font-bold shadow-md shadow-sky-100 shrink-0">
+                เน
+            </div>
+            <div class="text-center md:text-left space-y-2 w-full">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-2">
+                    <h1 class="text-xl font-bold text-slate-800">เนติราช นิมเจริญวัฒนกุล (เน)</h1>
+                    <span class="inline-flex self-center md:self-auto items-center px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-100">
+                        ผ่านเกณฑ์ทหารเรียบร้อย <i class="fa-solid fa-circle-check ml-1 text-emerald-500"></i>
+                    </span>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-3 mt-2 border-t border-slate-50 text-xs text-slate-600">
+                    <div><strong><i class="fa-solid fa-user-doctor text-slate-400 mr-1.5"></i>ตำแหน่ง:</strong> Practical Nurse (PN)</div>
+                    <div class="ring-animation"><strong><i class="fa-solid fa-phone text-slate-400 mr-1.5"></i>สายตรง:</strong> 063-5164271 / 062-4627516</div>
+                    <div><strong><i class="fa-solid fa-envelope text-slate-400 mr-1.5"></i>เมลงาน:</strong> netirat.nim@mahidol.ac.th</div>
+                    <div><strong><i class="fa-solid fa-location-dot text-slate-400 mr-1.5"></i>พื้นที่สะดวก:</strong> กรุงเทพมหานคร</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mt-8 mb-3 px-1">กรุณาเลือกหัวข้อที่ต้องการตรวจสอบ</h3>
+    
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div onclick="openModal('education')" class="bg-white p-5 rounded-2xl border border-slate-100 shadow-xs hover:shadow-md hover:border-sky-200 transition-all cursor-pointer flex items-center justify-between group">
+            <div class="space-y-1">
+                <span class="text-xs text-slate-400 block">Academic Credentials</span>
+                <h4 class="font-bold text-slate-700 group-hover:text-sky-600 transition-colors">ประวัติการศึกษา</h4>
+            </div>
+            <div class="w-10 h-10 bg-sky-50 text-sky-500 group-hover:bg-sky-500 group-hover:text-white transition-all rounded-xl flex items-center justify-center">
+                <i class="fa-solid fa-graduation-cap text-sm"></i>
+            </div>
+        </div>
+
+        <div onclick="openModal('skills')" class="bg-white p-5 rounded-2xl border border-slate-100 shadow-xs hover:shadow-md hover:border-sky-200 transition-all cursor-pointer flex items-center justify-between group">
+            <div class="space-y-1">
+                <span class="text-xs text-slate-400 block">Clinical Expertise</span>
+                <h4 class="font-bold text-slate-700 group-hover:text-sky-600 transition-colors">ทักษะความสามารถ</h4>
+            </div>
+            <div class="w-10 h-10 bg-amber-50 text-amber-500 group-hover:bg-amber-500 group-hover:text-white transition-all rounded-xl flex items-center justify-center">
+                <i class="fa-solid fa-kit-medical text-sm"></i>
+            </div>
+        </div>
+
+        <div onclick="openModal('activities')" class="bg-white p-5 rounded-2xl border border-slate-100 shadow-xs hover:shadow-md hover:border-sky-200 transition-all cursor-pointer flex items-center justify-between group">
+            <div class="space-y-1">
+                <span class="text-xs text-slate-400 block">Certifications</span>
+                <h4 class="font-bold text-slate-700 group-hover:text-sky-600 transition-colors">กิจกรรมนอกหลักสูตร</h4>
+            </div>
+            <div class="w-10 h-10 bg-rose-50 text-rose-500 group-hover:bg-rose-500 group-hover:text-white transition-all rounded-xl flex items-center justify-center">
+                <i class="fa-solid fa-heart-pulse text-sm"></i>
+            </div>
+        </div>
+
+        <div onclick="openModal('address')" class="bg-white p-5 rounded-2xl border border-slate-100 shadow-xs hover:shadow-md hover:border-sky-200 transition-all cursor-pointer flex items-center justify-between group">
+            <div class="space-y-1">
+                <span class="text-xs text-slate-400 block">Current Address</span>
+                <h4 class="font-bold text-slate-700 group-hover:text-sky-600 transition-colors">ข้อมูลที่อยู่ปัจจุบัน</h4>
+            </div>
+            <div class="w-10 h-10 bg-emerald-50 text-emerald-500 group-hover:bg-emerald-500 group-hover:text-white transition-all rounded-xl flex items-center justify-center">
+                <i class="fa-solid fa-map-location-dot text-sm"></i>
+            </div>
+        </div>
+    </div>
+
+    <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mt-8 mb-3 px-1">ประสบการณ์การทำงาน (Work Experience)</h3>
+    
+    <div class="space-y-4">
+        <div class="bg-white p-5 rounded-2xl border-l-4 border-emerald-500 border-y border-r border-slate-100 shadow-xs relative">
+            <div class="absolute top-4 right-4 flex items-center space-x-2 bg-emerald-50/60 px-2.5 py-1 rounded-full border border-emerald-100">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 status-pulse"></span>
+                <span class="text-[10px] font-bold text-emerald-700 uppercase tracking-wide">กำลังทำงานอยู่</span>
             </div>
 
-            <div id="splash-ekg-box" class="hidden flex flex-col items-center space-y-3 transform scale-95 transition-all duration-500">
-                <svg class="w-72 h-16" viewBox="0 0 300 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path class="ekg-svg-line" d="M0,50 L60,50 L75,20 L85,80 L95,45 L100,55 L105,50 L180,50 L195,10 L205,90 L215,40 L220,55 L225,50 L300,50" stroke="#0ea5e9" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                <span class="text-xs font-medium text-slate-500 bg-slate-100 px-3 py-1 rounded-full">
-                    พาพี่HR สุดน่ารักไปยังหน้า ถัดไปค้าบ 🤍
+            <span class="text-[11px] font-medium text-slate-400 block mb-1">1 มกราคม 2025 - ปัจจุบัน</span>
+            <h4 class="text-base font-bold text-slate-800">PRACTICAL NURSE (พนักงานพาร์ทไทม์)</h4>
+            <p class="text-xs text-slate-600 font-medium mt-0.5">โรงพยาบาลกรุงเทพคริสเตียน, กรุงเทพมหานคร</p>
+            
+            <div class="mt-3 flex flex-wrap gap-2 text-[11px]">
+                <span class="bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md font-medium">
+                    <i class="fa-solid fa-hospital-user mr-1 text-slate-400"></i> แผนกฉุกเฉินและวิกฤตหัวใจ (Emergency and Cardiac Care Unit)
+                </span>
+            </div>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border-l-4 border-amber-500 border-y border-r border-slate-100 shadow-xs relative">
+            <div class="absolute top-4 right-4 flex items-center space-x-2 bg-amber-50/60 px-2.5 py-1 rounded-full border border-amber-100">
+                <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                <span class="text-[10px] font-bold text-amber-700 uppercase tracking-wide">สิ้นสุดการเป็นพนักงาน</span>
+            </div>
+
+            <span class="text-[11px] font-medium text-slate-400 block mb-1">1 กรกฏาคม 2568 - 30 ธันวาคม 2568</span>
+            <h4 class="text-base font-bold text-slate-700">PRACTICAL NURSE</h4>
+            <p class="text-xs text-slate-600 font-medium mt-0.5">โรงพยาบาลศิริราช คณะแพทยศาสตร์ศิริราชพยาบาล</p>
+            
+            <div class="mt-3">
+                <span class="bg-slate-100 text-slate-600 px-2.5 py-1 rounded-md text-[11px] font-medium">
+                    <i class="fa-solid fa-x-ray mr-1 text-slate-400"></i> แผนก รังสีวิทยา Radiology
                 </span>
             </div>
         </div>
     </div>
 
-
-    <div id="guide-popup" class="fixed inset-0 bg-slate-900/40 backdrop-blur-xs z-40 hidden opacity-0 transition-opacity duration-500 flex justify-center items-center px-4">
-        <div class="bg-white rounded-3xl p-6 max-w-sm w-full shadow-2xl border border-slate-100 space-y-6 transform scale-95 transition-transform duration-500">
-            <div class="flex items-center space-x-3 text-sky-600">
-                <div class="w-10 h-10 bg-sky-50 rounded-xl flex items-center justify-center text-lg"><i class="fa-solid fa-circle-info"></i></div>
-                <h3 class="text-base font-bold text-slate-800">แนะนำการใช้งานเบื้องต้น</h3>
-            </div>
-            <div class="text-sm text-slate-500 space-y-3 leading-relaxed">
-                <p>ยินดีต้อนรับพี่ HR และผู้เข้าชมทุกท่านครับ! เว็บไซต์นี้ถูกออกแบบมาในสไตล์คลีนเพื่อรวบรวมข้อมูลของเนติราช:</p>
-                <ul class="space-y-2 list-disc list-inside text-xs pl-1">
-                    <li><strong class="text-slate-700">แถบเมนู 3 ขีดด้านบน:</strong> สำหรับกดปุ่มโทรด่วน หรือเลือกส่งอีเมลตามระบบที่สะดวก</li>
-                    <li><strong class="text-slate-700">โมดูลข้อมูล:</strong> ท่านสามารถกดคลิกที่กล่อง "ประวัติการศึกษา", "ทักษะ" เพื่อเปิดดูป๊อปอัพย่อยที่มีลูกเล่นโต้ตอบได้ครับ</li>
-                </ul>
-            </div>
-            <button onclick="closeGuide()" class="w-full py-3 bg-sky-500 hover:bg-sky-600 active:bg-sky-700 text-white font-medium rounded-xl text-sm transition-all shadow-sm shadow-sky-200">
-                รับทราบและเข้าสู่เว็บไซต์
-            </button>
-        </div>
-    </div>
-
-
-    <nav class="bg-white/90 backdrop-blur-md border-b border-slate-100 sticky top-0 z-30 px-4 py-3 flex justify-between items-center shadow-xs">
-        <div class="flex items-center space-x-3">
-            <div class="w-9 h-9 bg-gradient-to-br from-blue-900 to-indigo-950 rounded-xl flex items-center justify-center text-white text-[10px] font-bold shadow-inner">
-                MU
-            </div>
-            <div class="flex flex-col">
-                <span class="font-bold text-slate-800 text-sm tracking-wide">เนติราช นิ่มเจริญวัฒนกุล</span>
-                <span class="text-[11px] text-slate-400 font-medium">Practical Nurse · SIPN 74</span>
-            </div>
-        </div>
-        
-        <button onclick="toggleQuickMenu(true)" class="w-9 h-9 bg-slate-50 hover:bg-slate-100 rounded-xl flex items-center justify-center text-slate-600 transition-colors">
-            <i class="fa-solid fa-bars text-sm"></i>
-        </button>
-    </nav>
-
-
-    <div id="quick-menu" class="fixed inset-0 bg-slate-900/30 backdrop-blur-xs z-50 hidden transition-all duration-300">
-        <div class="bg-white w-full max-w-xs h-full p-6 shadow-2xl ml-auto flex flex-col justify-between transform translate-x-full transition-transform duration-300" id="quick-menu-content">
-            <div>
-                <div class="flex justify-between items-center pb-4 mb-6 border-b border-slate-100">
-                    <h3 class="font-bold text-slate-700 text-sm">การติดต่อสื่อสารด่วน</h3>
-                    <button onclick="toggleQuickMenu(false)" class="w-7 h-7 rounded-lg hover:bg-slate-100 text-slate-400 flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
-                </div>
-
-                <div class="space-y-3">
-                    <a href="tel:0635164271" class="flex items-center space-x-3 p-3 bg-emerald-50 text-emerald-700 hover:bg-emerald-100/80 rounded-xl transition font-medium text-sm">
-                        <span class="w-8 h-8 bg-emerald-500 text-white rounded-lg flex items-center justify-center"><i class="fa-solid fa-phone text-xs"></i></span>
-                        <span>โทรหาฉันตอนนี้</span>
-                    </a>
-
-                    <button onclick="toggleEmailDropdown()" class="w-full flex items-center justify-between p-3 bg-sky-50 text-sky-700 hover:bg-sky-100/80 rounded-xl transition font-medium text-sm text-left">
-                        <div class="flex items-center space-x-3">
-                            <span class="w-8 h-8 bg-sky-500 text-white rounded-lg flex items-center justify-center"><i class="fa-solid fa-envelope text-xs"></i></span>
-                            <span>ส่ง mail หาฉันตอนนี้</span>
-                        </div>
-                        <i class="fa-solid fa-chevron-down text-xs text-sky-400" id="email-chevron"></i>
-                    </button>
-
-                    <div id="email-dropdown" class="hidden space-y-1.5 pl-11 transition-all duration-200">
-                        <a href="mailto:Work.netirat@gmail.com" class="block text-xs p-2.5 text-slate-600 hover:text-sky-600 rounded-lg hover:bg-slate-50 border-l-2 border-sky-300 break-all">
-                            <i class="fa-solid fa-briefcase mr-1 text-slate-400"></i> Work.netirat@gmail.com
-                        </a>
-                        <a href="mailto:netirat.nim@mahidol.ac.th" class="block text-xs p-2.5 text-slate-600 hover:text-sky-600 rounded-lg hover:bg-slate-50 border-l-2 border-sky-300 break-all">
-                            <i class="fa-solid fa-graduation-cap mr-1 text-slate-400"></i> netirat.nim@mahidol.ac.th
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="text-[11px] text-slate-400 border-t border-slate-100 pt-4 text-center">
-                ระบบจัดการข้อมูลสารสนเทศส่วนบุคคล · NETIRAT
-            </div>
-        </div>
-    </div>
-
-
-    <main class="max-w-4xl mx-auto px-4 py-8 space-y-6">
-
-        <section class="bg-white rounded-3xl p-6 border border-slate-100 shadow-xs relative overflow-hidden">
-            <div class="flex flex-col md:flex-row items-center md:items-start space-y-4 md:space-y-0 md:space-x-6">
-                <div class="w-20 h-20 bg-gradient-to-br from-sky-400 to-sky-600 text-white rounded-2xl flex items-center justify-center text-3xl font-bold shadow-md shadow-sky-100 shrink-0">
-                    เน
-                </div>
-                <div class="text-center md:text-left space-y-2 w-full">
-                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-2">
-                        <h1 class="text-xl font-bold text-slate-800">เนติราช นิมเจริญวัฒนกุล (เน)</h1>
-                        <span class="inline-flex self-center md:self-auto items-center px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-100">
-                            ผ่านเกณฑ์ทหารเรียบร้อย <i class="fa-solid fa-circle-check ml-1 text-emerald-500"></i>
-                        </span>
-                    </div>
-                    <p class="text-xs text-slate-400 max-w-xl">
-                        <i class="fa-solid fa-map-pin mr-1.5 text-slate-300"></i>ที่อยู่ปัจจุบัน: โครงการเดอะคริส6 รัชดา17 ห้อง342/105 แขวงดินแดง, เขตดินแดง, จังหวัดกรุงเทพมหานคร, 10400
-                    </p>
-                    
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-3 mt-2 border-t border-slate-50 text-xs text-slate-600">
-                        <div><strong><i class="fa-solid fa-user-doctor text-slate-400 mr-1.5"></i>ตำแหน่ง:</strong> Practical Nurse (PN)</div>
-                        <div><strong><i class="fa-solid fa-phone text-slate-400 mr-1.5"></i>สายตรง:</strong> 063-5164271 / 062-4627516</div>
-                        <div><strong><i class="fa-solid fa-envelope text-slate-400 mr-1.5"></i>เมลงาน:</strong> netirat.nim@mahidol.ac.th</div>
-                        <div><strong><i class="fa-solid fa-location-dot text-slate-400 mr-1.5"></i>พื้นที่สะดวก:</strong> กรุงเทพมหานคร</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
-        <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mt-8 mb-3 px-1">กรุณาเลือกหัวข้อที่ต้องการตรวจสอบ</h3>
-        
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div onclick="openModal('education')" class="bg-white p-5 rounded-2xl border border-slate-100 shadow-xs hover:shadow-md hover:border-sky-200 transition-all cursor-pointer flex items-center justify-between group">
-                <div class="space-y-1">
-                    <span class="text-xs text-slate-400 block">Academic Credentials</span>
-                    <h4 class="font-bold text-slate-700 group-hover:text-sky-600 transition-colors">ประวัติการศึกษา</h4>
-                </div>
-                <div class="w-10 h-10 bg-sky-50 text-sky-500 group-hover:bg-sky-500 group-hover:text-white transition-all rounded-xl flex items-center justify-center">
-                    <i class="fa-solid fa-graduation-cap text-sm"></i>
-                </div>
-            </div>
-
-            <div onclick="openModal('skills')" class="bg-white p-5 rounded-2xl border border-slate-100 shadow-xs hover:shadow-md hover:border-sky-200 transition-all cursor-pointer flex items-center justify-between group">
-                <div class="space-y-1">
-                    <span class="text-xs text-slate-400 block">Clinical Expertise</span>
-                    <h4 class="font-bold text-slate-700 group-hover:text-sky-600 transition-colors">ทักษะความสามารถ</h4>
-                </div>
-                <div class="w-10 h-10 bg-amber-50 text-amber-500 group-hover:bg-amber-500 group-hover:text-white transition-all rounded-xl flex items-center justify-center">
-                    <i class="fa-solid fa-kit-medical text-sm"></i>
-                </div>
-            </div>
-
-            <div onclick="openModal('activities')" class="bg-white p-5 rounded-2xl border border-slate-100 shadow-xs hover:shadow-md hover:border-sky-200 transition-all cursor-pointer flex items-center justify-between group">
-                <div class="space-y-1">
-                    <span class="text-xs text-slate-400 block">Certifications</span>
-                    <h4 class="font-bold text-slate-700 group-hover:text-sky-600 transition-colors">กิจกรรมนอกหลักสูตร</h4>
-                </div>
-                <div class="w-10 h-10 bg-rose-50 text-rose-500 group-hover:bg-rose-500 group-hover:text-white transition-all rounded-xl flex items-center justify-center">
-                    <i class="fa-solid fa-heart-pulse text-sm"></i>
-                </div>
-            </div>
-        </div>
-
-
-        <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mt-8 mb-3 px-1">ประสบการณ์การทำงาน (Work Experience)</h3>
-        
-        <div class="space-y-4">
-            <div class="bg-white p-5 rounded-2xl border-l-4 border-emerald-500 border-y border-r border-slate-100 shadow-xs relative">
-                <div class="absolute top-4 right-4 flex items-center space-x-2 bg-emerald-50/60 px-2.5 py-1 rounded-full border border-emerald-100">
-                    <span class="w-2 h-2 rounded-full bg-emerald-500 status-pulse"></span>
-                    <span class="text-[10px] font-bold text-emerald-700 uppercase tracking-wide">กำลังทำงานอยู่</span>
-                </div>
-
-                <span class="text-[11px] font-medium text-slate-400 block mb-1">1 มกราคม 2025 - ปัจจุบัน</span>
-                <h4 class="text-base font-bold text-slate-800">PRACTICAL NURSE (พนักงานพาร์ทไทม์)</h4>
-                <p class="text-xs text-slate-600 font-medium mt-0.5">โรงพยาบาลกรุงเทพคริสเตียน, กรุงเทพมหานคร</p>
-                
-                <div class="mt-3 flex flex-wrap gap-2 text-[11px]">
-                    <span class="bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md font-medium">
-                        <i class="fa-solid fa-hospital-user mr-1 text-slate-400"></i> แผนกฉุกเฉินและวิกฤตหัวใจ (Emergency and Cardiac Care Unit)
-                    </span>
-                    <span class="bg-emerald-100/50 text-emerald-800 px-2.5 py-1 rounded-md font-semibold">
-                        <i class="fa-solid fa-circle-dollar-to-slot mr-1 text-emerald-500"></i> อัตราการจ้าง: 720 บาท / เวร
-                    </span>
-                </div>
-            </div>
-
-            <div class="bg-white p-5 rounded-2xl border-l-4 border-slate-300 border-y border-r border-slate-100 shadow-xs">
-                <span class="text-[11px] font-medium text-slate-400 block mb-1">1 กรกฏาคม 2568 - 30 ธันวาคม 2568</span>
-                <h4 class="text-base font-bold text-slate-700">PRACTICAL NURSE</h4>
-                <p class="text-xs text-slate-600 font-medium mt-0.5">โรงพยาบาลศิริราช คณะแพทยศาสตร์ศิริราชพยาบาล</p>
-                
-                <div class="mt-3">
-                    <span class="bg-slate-100 text-slate-600 px-2.5 py-1 rounded-md text-[11px] font-medium">
-                        <i class="fa-solid fa-x-ray mr-1 text-slate-400"></i> แผนก รังสีวิทยา Radiology
-                    </span>
-                </div>
-            </div>
-        </div>
-
-
-        <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mt-8 mb-3 px-1">ฝากข้อความถึง NETIRAT</h3>
-        
-        <section class="bg-white rounded-3xl p-6 border border-slate-100 shadow-xs">
-            <form action="https://formspree.io/f/xkolenpg" method="POST" class="space-y-4">
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-xs font-medium text-slate-500 mb-1">ชื่อผู้ติดต่อ / หน่วยงานองค์กร</label>
-                        <input type="text" name="name" required placeholder="เช่น พี่ HR โรงพยาบาล..." class="w-full text-xs p-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-hidden focus:border-sky-500 focus:bg-white transition-all">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-medium text-slate-500 mb-1">อีเมลผู้ติดต่อเพื่อตอบกลับ</label>
-                        <input type="email" name="_replyto" required placeholder="example@domain.com" class="w-full text-xs p-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-hidden focus:border-sky-500 focus:bg-white transition-all">
-                    </div>
+    <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mt-8 mb-3 px-1">ฝากข้อความถึง NETIRAT</h3>
+    <section class="bg-white rounded-3xl p-6 border border-slate-100 shadow-xs">
+        <form id="contact-form" onsubmit="handleFormSubmit(event)" class="space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-medium text-slate-500 mb-1">ชื่อผู้ติดต่อ / หน่วยงานองค์กร</label>
+                    <input type="text" name="name" required placeholder="เช่น พี่ HR โรงพยาบาล..." class="w-full text-xs p-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-hidden focus:border-sky-500 focus:bg-white transition-all">
                 </div>
                 <div>
-                    <label class="block text-xs font-medium text-slate-500 mb-1">เนื้อหาข้อความข้อเสนอแนะ</label>
-                    <textarea name="message" rows="4" required placeholder="พิมพ์ข้อความทิ้งไว้ตรงนี้ได้เลยครับ..." class="w-full text-xs p-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-hidden focus:border-sky-500 focus:bg-white transition-all"></textarea>
-                </div>
-                
-                <input type="hidden" name="_subject" value="มีข้อความใหม่จากเว็บไซต์ CV ของคุณเนติราช!">
-                
-                <button type="submit" class="w-full py-3 bg-slate-800 hover:bg-slate-900 text-white font-medium rounded-xl text-xs tracking-wide transition-all shadow-sm">
-                    <i class="fa-solid fa-paper-plane mr-1"></i> ส่งข้อความเข้าอีเมลเนติราชโดยตรง
-                </button>
-            </form>
-        </section>
-
-    </main>
-
-
-    <div id="modal-education" class="fixed inset-0 bg-slate-950/40 backdrop-blur-xs z-50 hidden opacity-0 transition-opacity duration-300 flex justify-center items-center px-4">
-        <div class="bg-white rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 transform scale-95 transition-transform duration-300">
-            <div class="flex justify-between items-center pb-2 border-b border-slate-100">
-                <h3 class="font-bold text-slate-800 text-sm"><i class="fa-solid fa-graduation-cap text-sky-500 mr-1.5"></i> ประวัติการศึกษา (Education)</h3>
-                <button onclick="closeModal('education')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-            <div class="space-y-4 py-2">
-                <div class="relative pl-4 border-l-2 border-sky-400">
-                    <h4 class="font-bold text-xs text-slate-800">อนุปริญญา | Practical Nurse</h4>
-                    <p class="text-[11px] text-slate-500">มหาวิทยาลัยมหิดล, กรุงเทพมหานคร</p>
-                    <span class="inline-block bg-sky-50 text-sky-700 text-[10px] px-2 py-0.5 rounded mt-1 font-medium">พ.ศ. 2568 / 2025</span>
-                </div>
-                <div class="relative pl-4 border-l-2 border-slate-300">
-                    <h4 class="font-bold text-xs text-slate-800">ประกาศนียบัตรมัธยมศึกษาตอนปลาย | ไอซีที</h4>
-                    <p class="text-[11px] text-slate-500">วิทยาลัยอาชีวศึกษานครศรีธรรมราช, นครศรีธรรมราช</p>
-                    <span class="inline-block bg-slate-50 text-slate-600 text-[10px] px-2 py-0.5 rounded mt-1 font-medium">พ.ศ. 2567 / 2024</span>
+                    <label class="block text-xs font-medium text-slate-500 mb-1">อีเมลผู้ติดต่อเพื่อตอบกลับ</label>
+                    <input type="email" name="_replyto" required placeholder="example@domain.com" class="w-full text-xs p-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-hidden focus:border-sky-500 focus:bg-white transition-all">
                 </div>
             </div>
-        </div>
-    </div>
-
-    <div id="modal-skills" class="fixed inset-0 bg-slate-950/40 backdrop-blur-xs z-50 hidden opacity-0 transition-opacity duration-300 flex justify-center items-center px-4">
-        <div class="bg-white rounded-3xl p-6 max-w-lg w-full h-[85vh] overflow-y-auto shadow-2xl space-y-4 transform scale-95 transition-transform duration-300">
-            <div class="flex justify-between items-center pb-2 border-b border-slate-100 sticky top-0 bg-white z-10">
-                <h3 class="font-bold text-slate-800 text-sm"><i class="fa-solid fa-star text-amber-500 mr-1.5"></i> ทักษะระดับปฏิบัติการ (Skills Matrix)</h3>
-                <button onclick="closeModal('skills')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark"></i></button>
+            <div>
+                <label class="block text-xs font-medium text-slate-500 mb-1">เนื้อหาข้อความข้อเสนอแนะ</label>
+                <textarea name="message" rows="4" required placeholder="พิมพ์ข้อความทิ้งไว้ตรงนี้ได้เลยครับ..." class="w-full text-xs p-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-hidden focus:border-sky-500 focus:bg-white transition-all"></textarea>
             </div>
             
-            <div class="space-y-3 text-xs pt-2">
-                <div class="bg-slate-50 p-2.5 rounded-xl">
-                    <div class="flex justify-between mb-1 text-slate-700 font-medium"><span><i class="fa-solid fa-heart mr-1.5 text-red-400"></i> ความอดทนสูง / การสื่อสารที่ดี</span><span>95%</span></div>
-                    <div class="w-full bg-slate-200 h-1.5 rounded-full"><div class="bg-sky-500 h-1.5 rounded-full" style="width: 95%"></div></div>
-                </div>
-                <div class="bg-slate-50 p-2.5 rounded-xl">
-                    <div class="flex justify-between mb-1 text-slate-700 font-medium"><span><i class="fa-solid fa-hand-holding-heart mr-1.5 text-pink-400"></i> ความรับผิดชอบสูง / ความเมตตาเอื้ออารี</span><span>95%</span></div>
-                    <div class="w-full bg-slate-200 h-1.5 rounded-full"><div class="bg-pink-500 h-1.5 rounded-full" style="width: 95%"></div></div>
-                </div>
-                <div class="bg-slate-50 p-2.5 rounded-xl">
-                    <div class="flex justify-between mb-1 text-slate-700 font-medium"><span><i class="fa-solid fa-user-check mr-1.5 text-emerald-400"></i> การดูแลรักษาผู้ป่วย / ความใส่ใจรายละเอียด</span><span>90%</span></div>
-                    <div class="w-full bg-slate-200 h-1.5 rounded-full"><div class="bg-emerald-500 h-1.5 rounded-full" style="width: 90%"></div></div>
-                </div>
-                <div class="bg-slate-50 p-2.5 rounded-xl">
-                    <div class="flex justify-between mb-1 text-slate-700 font-medium"><span><i class="fa-solid fa-ear-listen mr-1.5 text-teal-400"></i> การฟังผู้อื่น / การใช้เครื่องมือแพทย์</span><span>85%</span></div>
-                    <div class="w-full bg-slate-200 h-1.5 rounded-full"><div class="bg-teal-500 h-1.5 rounded-full" style="width: 85%"></div></div>
-                </div>
-                <div class="bg-slate-50 p-2.5 rounded-xl">
-                    <div class="flex justify-between mb-1 text-slate-700 font-medium"><span><i class="fa-solid fa-clock mr-1.5 text-indigo-400"></i> การบริหารจัดการเวลา / การบันทึกข้อมูลผู้ป่วย</span><span>90%</span></div>
-                    <div class="w-full bg-slate-200 h-1.5 rounded-full"><div class="bg-indigo-500 h-1.5 rounded-full" style="width: 90%"></div></div>
-                </div>
-                <div class="bg-slate-50 p-2.5 rounded-xl">
-                    <div class="flex justify-between mb-1 text-slate-700 font-medium"><span><i class="fa-solid fa-notes-medical mr-1.5 text-purple-400"></i> การพยาบาลขั้นพื้นฐาน / การดูแลเครื่องมือแพทย์</span><span>92%</span></div>
-                    <div class="w-full bg-slate-200 h-1.5 rounded-full"><div class="bg-purple-500 h-1.5 rounded-full" style="width: 92%"></div></div>
-                </div>
-                <div class="bg-slate-50 p-2.5 rounded-xl">
-                    <div class="flex justify-between mb-1 text-slate-700 font-medium"><span><i class="fa-solid fa-bolt mr-1.5 text-amber-400"></i> ความคล่องแคล่วว่องไว / ความรู้ด้านเทคโนโลยีสุขภาพ</span><span>88%</span></div>
-                    <div class="w-full bg-slate-200 h-1.5 rounded-full"><div class="bg-amber-500 h-1.5 rounded-full" style="width: 88%"></div></div>
-                </div>
-                <div class="bg-slate-50 p-2.5 rounded-xl">
-                    <div class="flex justify-between mb-1 text-slate-700 font-medium"><span><i class="fa-solid fa-brain mr-1.5 text-blue-400"></i> การแก้ไขปัญหาเฉพาะหน้า / การใช้งานซอฟต์แวร์ระบบข้อมูลสุขภาพ</span><span>90%</span></div>
-                    <div class="w-full bg-slate-200 h-1.5 rounded-full"><div class="bg-blue-500 h-1.5 rounded-full" style="width: 90%"></div></div>
-                </div>
-                <div class="bg-slate-50 p-2.5 rounded-xl">
-                    <div class="flex justify-between mb-1 text-slate-700 font-medium"><span><i class="fa-solid fa-lungs mr-1.5 text-sky-400"></i> การใช้งานเครื่องช่วยหายใจ</span><span>85%</span></div>
-                    <div class="w-full bg-slate-200 h-1.5 rounded-full"><div class="bg-sky-400 h-1.5 rounded-full" style="width: 85%"></div></div>
-                </div>
-                <div class="bg-slate-50 p-2.5 rounded-xl">
-                    <div class="flex justify-between mb-1 text-slate-700 font-medium"><span><i class="fa-solid fa-kit-medical mr-1.5 text-rose-400"></i> ความรู้ด้านการปฐมพยาบาลฉุกเฉิน</span><span>95%</span></div>
-                    <div class="w-full bg-slate-200 h-1.5 rounded-full"><div class="bg-rose-500 h-1.5 rounded-full" style="width: 95%"></div></div>
-                </div>
+            <button type="submit" class="w-full py-3 bg-slate-800 hover:bg-slate-900 text-white font-medium rounded-xl text-xs tracking-wide transition-all shadow-sm">
+                <i class="fa-solid fa-paper-plane mr-1"></i> ส่งข้อความเข้าอีเมลเนติราชโดยตรง
+            </button>
+        </form>
+    </section>
+
+    <div class="flex justify-center space-x-3 pt-4">
+        <button onclick="openModal('address')" class="px-4 py-2.5 bg-white border border-slate-200 hover:border-sky-400 rounded-xl text-xs text-slate-600 font-medium transition-all shadow-xs flex items-center space-x-2">
+            <i class="fa-solid fa-map-pin text-sky-500"></i>
+            <span>ดูที่อยู่ปัจจุบัน</span>
+        </button>
+        <button onclick="openModal('external-error')" class="px-4 py-2.5 bg-white border border-slate-200 hover:border-slate-400 rounded-xl text-xs text-slate-600 font-medium transition-all shadow-xs flex items-center space-x-2">
+            <i class="fa-solid fa-circle-ellipsis text-slate-400"></i>
+            <span>รายละเอียดอื่นๆ</span>
+        </button>
+    </div>
+
+</main>
+
+<div id="modal-education" class="fixed inset-0 bg-slate-950/40 backdrop-blur-xs z-50 hidden opacity-0 transition-opacity duration-300 flex justify-center items-center px-4">
+    <div class="bg-white rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 transform scale-95 transition-transform duration-300">
+        <div class="flex justify-between items-center pb-2 border-b border-slate-100">
+            <h3 class="font-bold text-slate-800 text-sm"><i class="fa-solid fa-graduation-cap text-sky-500 mr-1.5"></i> ประวัติการศึกษา (Education)</h3>
+            <button onclick="closeModal('education')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="space-y-4 py-2">
+            <div class="relative pl-4 border-l-2 border-sky-400">
+                <h4 class="font-bold text-xs text-slate-800">อนุปริญญา | Practical Nurse</h4>
+                <p class="text-[11px] text-slate-500">มหาวิทยาลัยมหิดล, กรุงเทพมหานคร</p>
+                <span class="inline-block bg-sky-50 text-sky-700 text-[10px] px-2 py-0.5 rounded mt-1 font-medium">พ.ศ. 2568 / 2025</span>
+            </div>
+            <div class="relative pl-4 border-l-2 border-slate-300">
+                <h4 class="font-bold text-xs text-slate-800">ประกาศนียบัตรมัธยมศึกษาตอนปลาย | ไอซีที</h4>
+                <p class="text-[11px] text-slate-500">วิทยาลัยอาชีวศึกษานครศรีธรรมราช, นครศรีธรรมราช</p>
+                <span class="inline-block bg-slate-50 text-slate-600 text-[10px] px-2 py-0.5 rounded mt-1 font-medium">พ.ศ. 2567 / 2024</span>
             </div>
         </div>
     </div>
+</div>
 
-    <div id="modal-activities" class="fixed inset-0 bg-slate-950/40 backdrop-blur-xs z-50 hidden opacity-0 transition-opacity duration-300 flex justify-center items-center px-4">
-        <div class="bg-white rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 transform scale-95 transition-transform duration-300">
-            <div class="flex justify-between items-center pb-2 border-b border-slate-100">
-                <h3 class="font-bold text-slate-800 text-sm"><i class="fa-solid fa-shield-heart text-rose-500 mr-1.5"></i> กิจกรรมนอกหลักสูตร</h3>
-                <button onclick="closeModal('activities')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark"></i></button>
+<div id="modal-skills" class="fixed inset-0 bg-slate-950/40 backdrop-blur-xs z-50 hidden opacity-0 transition-opacity duration-300 flex justify-center items-center px-4">
+    <div class="bg-white rounded-3xl p-6 max-w-lg w-full h-[85vh] overflow-y-auto shadow-2xl space-y-4 transform scale-95 transition-transform duration-300">
+        <div class="flex justify-between items-center pb-2 border-b border-slate-100 sticky top-0 bg-white z-10">
+            <h3 class="font-bold text-slate-800 text-sm"><i class="fa-solid fa-star text-amber-500 mr-1.5"></i> ทักษะระดับปฏิบัติการ (Skills Matrix)</h3>
+            <button onclick="closeModal('skills')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        
+        <div class="space-y-3 text-xs pt-2">
+            <div class="bg-slate-50 p-2.5 rounded-xl">
+                <div class="flex justify-between mb-1 text-slate-700 font-medium"><span><i class="fa-solid fa-heart mr-1.5 text-red-400"></i> ความอดทนสูง / การสื่อสารที่ดี</span><span>95%</span></div>
+                <div class="w-full bg-slate-200 h-1.5 rounded-full"><div class="bg-sky-500 h-1.5 rounded-full" style="width: 95%"></div></div>
             </div>
-            <div class="p-4 bg-slate-50 rounded-2xl flex items-start space-x-3 text-xs">
-                <span class="text-xl text-rose-500 pt-0.5"><i class="fa-solid fa-kit-medical"></i></span>
-                <div class="space-y-1">
-                    <h4 class="font-bold text-slate-800">Basic Life Support (การช่วยชีวิตขั้นพื้นฐาน)</h4>
-                    <p class="text-slate-500 leading-relaxed">ผ่านกระบวนการฝึกอบรมและทดสอบเกณฑ์มาตรฐานโดยตรง ณ คณะแพทยศาสตร์ศิริราชพยาบาล (สถานะปัจจุบันมีผลรับรองสมบูรณ์)</p>
-                </div>
+            <div class="bg-slate-50 p-2.5 rounded-xl">
+                <div class="flex justify-between mb-1 text-slate-700 font-medium"><span><i class="fa-solid fa-hand-holding-heart mr-1.5 text-pink-400"></i> ความรับผิดชอบสูง / ความเมตตาเอื้ออารี</span><span>95%</span></div>
+                <div class="w-full bg-slate-200 h-1.5 rounded-full"><div class="bg-pink-500 h-1.5 rounded-full" style="width: 95%"></div></div>
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-xl">
+                <div class="flex justify-between mb-1 text-slate-700 font-medium"><span><i class="fa-solid fa-user-check mr-1.5 text-emerald-400"></i> การดูแลรักษาผู้ป่วย / ความใส่ใจรายละเอียด</span><span>90%</span></div>
+                <div class="w-full bg-slate-200 h-1.5 rounded-full"><div class="bg-emerald-500 h-1.5 rounded-full" style="width: 90%"></div></div>
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-xl">
+                <div class="flex justify-between mb-1 text-slate-700 font-medium"><span><i class="fa-solid fa-ear-listen mr-1.5 text-teal-400"></i> การฟังผู้อื่น / การใช้เครื่องมือแพทย์</span><span>85%</span></div>
+                <div class="w-full bg-slate-200 h-1.5 rounded-full"><div class="bg-teal-500 h-1.5 rounded-full" style="width: 85%"></div></div>
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-xl">
+                <div class="flex justify-between mb-1 text-slate-700 font-medium"><span><i class="fa-solid fa-clock mr-1.5 text-indigo-400"></i> การบริหารจัดการเวลา / การบันทึกข้อมูลผู้ป่วย</span><span>90%</span></div>
+                <div class="w-full bg-slate-200 h-1.5 rounded-full"><div class="bg-indigo-500 h-1.5 rounded-full" style="width: 90%"></div></div>
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-xl">
+                <div class="flex justify-between mb-1 text-slate-700 font-medium"><span><i class="fa-solid fa-notes-medical mr-1.5 text-purple-400"></i> การพยาบาลขั้นพื้นฐาน / การดูแลเครื่องมือแพทย์</span><span>92%</span></div>
+                <div class="w-full bg-slate-200 h-1.5 rounded-full"><div class="bg-purple-500 h-1.5 rounded-full" style="width: 92%"></div></div>
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-xl">
+                <div class="flex justify-between mb-1 text-slate-700 font-medium"><span><i class="fa-solid fa-bolt mr-1.5 text-amber-400"></i> ความคล่องแคล่วว่องไว / ความรู้ด้านเทคโนโลยีสุขภาพ</span><span>88%</span></div>
+                <div class="w-full bg-slate-200 h-1.5 rounded-full"><div class="bg-amber-500 h-1.5 rounded-full" style="width: 88%"></div></div>
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-xl">
+                <div class="flex justify-between mb-1 text-slate-700 font-medium"><span><i class="fa-solid fa-brain mr-1.5 text-blue-400"></i> การแก้ไขปัญหาเฉพาะหน้า / การใช้งานซอฟต์แวร์ระบบข้อมูลสุขภาพ</span><span>90%</span></div>
+                <div class="w-full bg-slate-200 h-1.5 rounded-full"><div class="bg-blue-500 h-1.5 rounded-full" style="width: 90%"></div></div>
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-xl">
+                <div class="flex justify-between mb-1 text-slate-700 font-medium"><span><i class="fa-solid fa-lungs mr-1.5 text-sky-400"></i> การใช้งานเครื่องช่วยหายใจ</span><span>85%</span></div>
+                <div class="w-full bg-slate-200 h-1.5 rounded-full"><div class="bg-sky-400 h-1.5 rounded-full" style="width: 85%"></div></div>
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-xl">
+                <div class="flex justify-between mb-1 text-slate-700 font-medium"><span><i class="fa-solid fa-kit-medical mr-1.5 text-rose-400"></i> ความรู้ด้านการปฐมพยาบาลฉุกเฉิน</span><span>95%</span></div>
+                <div class="w-full bg-slate-200 h-1.5 rounded-full"><div class="bg-rose-500 h-1.5 rounded-full" style="width: 95%"></div></div>
             </div>
         </div>
     </div>
+</div>
 
+<div id="modal-activities" class="fixed inset-0 bg-slate-950/40 backdrop-blur-xs z-50 hidden opacity-0 transition-opacity duration-300 flex justify-center items-center px-4">
+    <div class="bg-white rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 transform scale-95 transition-transform duration-300">
+        <div class="flex justify-between items-center pb-2 border-b border-slate-100">
+            <h3 class="font-bold text-slate-800 text-sm"><i class="fa-solid fa-shield-heart text-rose-500 mr-1.5"></i> กิจกรรมนอกหลักสูตร</h3>
+            <button onclick="closeModal('activities')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="p-4 bg-slate-50 rounded-2xl flex items-start space-x-3 text-xs">
+            <span class="text-xl text-rose-500 pt-0.5"><i class="fa-solid fa-kit-medical"></i></span>
+            <div class="space-y-1">
+                <h4 class="font-bold text-slate-800">Basic Life Support (การช่วยชีวิตขั้นพื้นฐาน)</h4>
+                <p class="text-slate-500 leading-relaxed">ผ่านกระบวนการฝึกอบรมและทดสอบเกณฑ์มาตรฐานโดยตรง ณ คณะแพทยศาสตร์ศิริราชพยาบาล (สถานะปัจจุบันมีผลรับรองสมบูรณ์)</p>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <footer class="bg-white border-t border-slate-100 py-6 mt-16 text-center text-[11px] font-medium text-slate-400 tracking-wider">
-        จัดทำโดย netirat@2026 PN · สงวนลิขสิทธิ์ข้อมูลตามนโยบายองค์กร
-    </footer>
+<div id="modal-address" class="fixed inset-0 bg-slate-950/40 backdrop-blur-xs z-50 hidden opacity-0 transition-opacity duration-300 flex justify-center items-center px-4">
+    <div class="bg-white rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 transform scale-95 transition-transform duration-300">
+        <div class="flex justify-between items-center pb-2 border-b border-slate-100">
+            <h3 class="font-bold text-slate-800 text-sm"><i class="fa-solid fa-map-location-dot text-emerald-500 mr-1.5"></i> ข้อมูลที่อยู่ปัจจุบัน</h3>
+            <button onclick="closeModal('address')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="p-4 bg-slate-50 rounded-2xl text-xs text-slate-700 leading-relaxed space-y-2">
+            <p class="font-bold text-slate-800">ที่พำนักปัจจุบัน:</p>
+            <p>โครงการเดอะคริส6 รัชดา17 ห้อง342/105 แขวงดินแดง, เขตดินแดง, จังหวัดกรุงเทพมหานคร, 10400</p>
+        </div>
+    </div>
+</div>
 
+<div id="modal-external-error" class="fixed inset-0 bg-slate-950/40 backdrop-blur-xs z-50 hidden opacity-0 transition-opacity duration-300 flex justify-center items-center px-4">
+    <div class="bg-white rounded-3xl p-6 max-w-sm w-full shadow-2xl space-y-4 text-center transform scale-95 transition-transform duration-300">
+        <div class="w-12 h-12 bg-amber-50 text-amber-500 rounded-full flex items-center justify-center mx-auto text-xl">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+        </div>
+        <div class="space-y-2">
+            <h3 class="font-bold text-slate-800 text-sm">ไม่สามารถแสดงรายละเอียดได้ในขณะนี้</h3>
+            <p class="text-xs text-slate-500 leading-relaxed">ขออภัยในความไม่สะดวก ระบบกำลังปรับปรุงฐานข้อมูลพอร์ตโฟลิโอเพิ่มเติม</p>
+        </div>
+        <button onclick="closeModal('external-error')" class="w-full py-2 bg-slate-100 hover:bg-slate-200 text-slate-600 text-xs font-semibold rounded-xl transition-all">
+            ปิดหน้าต่าง
+        </button>
+    </div>
+</div>
 
-    <script>
-        // ควบคุมลำดับการทำงานของหน้า Splash Screen (1-2 วินาที)
-        window.addEventListener('DOMContentLoaded', () => {
-            const splashIcon = document.getElementById('splash-icon-box');
-            const splashTxt2 = document.getElementById('splash-text-2');
-            const ekgBox = document.getElementById('splash-ekg-box');
-            const splashScreen = document.getElementById('splash-screen');
+<div id="modal-success" class="fixed inset-0 bg-slate-950/40 backdrop-blur-xs z-50 hidden opacity-0 transition-opacity duration-300 flex justify-center items-center px-4">
+    <div class="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl text-center space-y-6 transform scale-95 transition-transform duration-300">
+        <div class="w-16 h-16 bg-emerald-50 text-emerald-500 rounded-full flex items-center justify-center mx-auto text-2xl">
+            <i class="fa-solid fa-circle-check"></i>
+        </div>
+        <div class="space-y-3">
+            <h3 class="font-bold text-slate-800 text-lg ring-animation">ขอขอบพระคุณสำหรับการติดต่อ</h3>
+            <p class="text-sm text-slate-600 leading-relaxed ring-animation font-medium text-emerald-700">
+                ผมหวังว่าจะได้เป็นส่วนหนึ่งกับทางโรงพยาบาลนะครับ
+            </p>
+        </div>
+        <button onclick="closeSuccessModal()" class="px-6 py-2.5 bg-slate-800 hover:bg-slate-900 text-white text-xs font-medium rounded-xl transition-all shadow-sm">
+            กลับสู่หน้าหลัก
+        </button>
+    </div>
+</div>
 
-            // วินาทีที่ 1.2: แสดงคำว่ากรุณารอสักครู่
+<footer class="bg-white border-t border-slate-100 py-6 mt-16 text-center text-[11px] font-medium text-slate-400 tracking-wider">
+    จัดทำโดย netirat@2026 PN · สงวนลิขสิทธิ์ข้อมูลตามนโยบายองค์กร
+</footer>
+
+<script>
+    // ควบคุมลำดับการทำงานของหน้า Splash Screen
+    window.addEventListener('DOMContentLoaded', () => {
+        const splashIcon = document.getElementById('splash-icon-box');
+        const splashTxt2 = document.getElementById('splash-text-2');
+        const ekgBox = document.getElementById('splash-ekg-box');
+        const splashScreen = document.getElementById('splash-screen');
+
+        setTimeout(() => {
+            splashIcon.style.transform = 'scale(0.9)';
+            splashTxt2.classList.remove('opacity-0');
+        }, 1200);
+
+        setTimeout(() => {
+            document.getElementById('splash-text-1').classList.add('hidden');
+            splashTxt2.classList.add('hidden');
+            splashIcon.classList.add('hidden');
+            ekgBox.classList.remove('hidden');
+        }, 2400);
+
+        setTimeout(() => {
+            splashScreen.classList.add('opacity-0');
             setTimeout(() => {
-                splashIcon.style.transform = 'scale(0.9)';
-                splashTxt2.classList.remove('opacity-0');
-            }, 1200);
+                splashScreen.classList.add('hidden');
+                openGuide();
+            }, 700);
+        }, 5000);
+    });
 
-            // วินาทีที่ 2.4: สลับไปแสดงผลกราฟ EKG วิ่งพามุ่งหน้าถัดไป
-            setTimeout(() => {
-                document.getElementById('splash-text-1').classList.add('hidden');
-                splashTxt2.classList.add('hidden');
-                splashIcon.classList.add('hidden');
-                ekgBox.classList.remove('hidden');
-            }, 2400);
+    // เปิด-ปิด ป๊อปอัพแนะนำการใช้งาน
+    function openGuide() {
+        const guide = document.getElementById('guide-popup');
+        guide.classList.remove('hidden');
+        setTimeout(() => {
+            guide.classList.remove('opacity-0');
+            guide.querySelector('div').classList.remove('scale-95');
+        }, 50);
+    }
+    function closeGuide() {
+        const guide = document.getElementById('guide-popup');
+        guide.classList.add('opacity-0');
+        guide.querySelector('div').classList.add('scale-95');
+        setTimeout(() => {
+            guide.hidden = true;
+            guide.classList.add('hidden');
+        }, 500);
+    }
 
-            // วินาทีที่ 5.0: นำพาออกจาก Splash Screen และเปิดหน้าต่างแนะนำผู้ใช้ (Guide Popup)
+    // ระบบเปิด/ปิด แถบเมนูด่วนด้านข้าง (3 ขีด)
+    function toggleQuickMenu(open) {
+        const menu = document.getElementById('quick-menu');
+        const content = document.getElementById('quick-menu-content');
+        if (open) {
+            menu.classList.remove('hidden');
             setTimeout(() => {
-                splashScreen.classList.add('opacity-0');
-                setTimeout(() => {
-                    splashScreen.classList.add('hidden');
-                    openGuide();
-                }, 700);
-            }, 5000);
-        });
-
-        // ฟังก์ชันระบบควบคุมการเปิด-ปิด ป๊อปอัพแนะนำการใช้งาน
-        function openGuide() {
-            const guide = document.getElementById('guide-popup');
-            guide.classList.remove('hidden');
-            setTimeout(() => {
-                guide.classList.remove('opacity-0');
-                guide.querySelector('div').classList.remove('scale-95');
+                content.classList.remove('translate-x-full');
             }, 50);
-        }
-        function closeGuide() {
-            const guide = document.getElementById('guide-popup');
-            guide.classList.add('opacity-0');
-            guide.querySelector('div').classList.add('scale-95');
+        } else {
+            content.classList.add('translate-x-full');
             setTimeout(() => {
-                guide.classList.add('hidden');
-            }, 500);
-        }
-
-        // ระบบเปิด/ปิด แถบเมนูด่วนด้านข้าง (3 ขีด)
-        function toggleQuickMenu(open) {
-            const menu = document.getElementById('quick-menu');
-            const content = document.getElementById('quick-menu-content');
-            if (open) {
-                menu.classList.remove('hidden');
-                setTimeout(() => {
-                    content.classList.remove('translate-x-full');
-                }, 50);
-            } else {
-                content.classList.add('translate-x-full');
-                setTimeout(() => {
-                    menu.classList.add('hidden');
-                }, 300);
-            }
-        }
-
-        // เมนูดรอปดาวน์สำหรับเลือกเมลภายในแถบ 3 ขีด
-        function toggleEmailDropdown() {
-            const dropdown = document.getElementById('email-dropdown');
-            const chevron = document.getElementById('email-chevron');
-            dropdown.classList.toggle('hidden');
-            chevron.classList.toggle('rotate-180');
-        }
-
-        // ระบบบริหารจัดการชุดควบคุม Dynamic Modals (กล่องข้อมูลเชิงลึกเมื่อคลิกดู)
-        function openModal(id) {
-            const targetModal = document.getElementById(`modal-${id}`);
-            targetModal.classList.remove('hidden');
-            setTimeout(() => {
-                targetModal.classList.remove('opacity-0');
-                targetModal.querySelector('div').classList.remove('scale-95');
-            }, 50);
-        }
-        function closeModal(id) {
-            const targetModal = document.getElementById(`modal-${id}`);
-            targetModal.classList.add('opacity-0');
-            targetModal.querySelector('div').classList.add('scale-95');
-            setTimeout(() => {
-                targetModal.classList.add('hidden');
+                menu.classList.add('hidden');
             }, 300);
         }
-    </script>
+    }
+
+    // ดรอปดาวน์อีเมลในแถบเมนู 3 ขีด
+    function toggleEmailDropdown() {
+        const dropdown = document.getElementById('email-dropdown');
+        const chevron = document.getElementById('email-chevron');
+        dropdown.classList.toggle('hidden');
+        chevron.classList.toggle('rotate-180');
+    }
+
+    // ระบบคุมชุดควบคุม Modals ทั่วไป
+    function openModal(id) {
+        // ปิดเมนู 3 ขีดก่อนเพื่อความสมูทหากเปิดมาจากตรงนั้น
+        toggleQuickMenu(false);
+        const targetModal = document.getElementById(`modal-${id}`);
+        targetModal.classList.remove('hidden');
+        setTimeout(() => {
+            targetModal.classList.remove('opacity-0');
+            targetModal.querySelector('div').classList.remove('scale-95');
+        }, 50);
+    }
+    function closeModal(id) {
+        const targetModal = document.getElementById(`modal-${id}`);
+        targetModal.classList.add('opacity-0');
+        targetModal.querySelector('div').classList.add('scale-95');
+        setTimeout(() => {
+            targetModal.classList.add('hidden');
+        }, 300);
+    }
+
+    // ฟังก์ชันยิงพลุ (ดูหรูหรา ไม่เด็กเกินไป)
+    function launchElegantFirefoam() {
+        const duration = 2 * 1000;
+        const animationEnd = Date.now() + duration;
+        const defaults = { startVelocity: 25, spread: 360, ticks: 50, zIndex: 60 };
+
+        function randomInRange(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+
+        const interval = setInterval(function() {
+            const timeLeft = animationEnd - Date.now();
+
+            if (timeLeft <= 0) {
+                return clearInterval(interval);
+            }
+
+            const particleCount = 30 * (timeLeft / duration);
+            // ยิงจากฝั่งซ้ายและขวาเข้ามาตรงกลางอย่างประณีต
+            confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
+            confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
+        }, 250);
+    }
+
+    // จัดการระบบเมื่อกดส่งข้อความ (Submit Form)
+    function handleFormSubmit(event) {
+        event.preventDefault(); // ป้องกันการเปลี่ยนหน้าของเบราว์เซอร์เดิม
+        
+        // ฟอร์มส่งไป Formspree ผ่านเบื้องหลัง (AJAX) เพื่อเอาใจระบบ popup ของเรา
+        const form = event.target;
+        const data = new FormData(form);
+        
+        // แสดงป๊อปอัพขอบคุณ และยิงพลุทันทีเพื่อไม่ให้ผู้ใช้งานรอนาน
+        const successModal = document.getElementById('modal-success');
+        successModal.classList.remove('hidden');
+        setTimeout(() => {
+            successModal.classList.remove('opacity-0');
+            successModal.querySelector('div').classList.remove('scale-95');
+            launchElegantFirefoam();
+        }, 50);
+
+        // ยิงข้อมูลเข้าเซิร์ฟเวอร์แบบ asynchronous
+        fetch("https://formspree.io/f/xkolenpg", {
+            method: "POST",
+            body: data,
+            headers: { 'Accept': 'application/json' }
+        }).then(response => {
+            if (response.ok) {
+                form.reset();
+            }
+        }).catch(error => {
+            console.error("เกิดข้อผิดพลาดในการส่งข้อมูลระบบ:", error);
+        });
+    }
+
+    function closeSuccessModal() {
+        closeModal('success');
+    }
+</script>
 </body>
 </html>
