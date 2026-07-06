@@ -152,6 +152,11 @@
             </div>
 
             <div class="space-y-3">
+                <button onclick="accessPrivateDocument()" class="flex items-center space-x-3 p-3 bg-amber-50 text-amber-800 hover:bg-amber-100/80 rounded-xl transition font-medium text-sm w-full text-left">
+                    <span class="w-8 h-8 bg-amber-500 text-white rounded-lg flex items-center justify-center"><i class="fa-solid fa-file-shield text-xs"></i></span>
+                    <span>เอกสารส่วนตัว</span>
+                </button>
+
                 <a href="tel:0635164271" class="ring-animation flex items-center space-x-3 p-3 bg-emerald-50 text-emerald-700 hover:bg-emerald-100/80 rounded-xl transition font-medium text-sm w-full">
                     <span class="w-8 h-8 bg-emerald-500 text-white rounded-lg flex items-center justify-center"><i class="fa-solid fa-phone text-xs"></i></span>
                     <span>โทรหาฉันตอนนี้ (063-5164271)</span>
@@ -565,6 +570,19 @@
         setTimeout(() => {
             targetModal.classList.add('hidden');
         }, 300);
+    }
+
+    // ฟังก์ชันสำหรับเมนู "เอกสารส่วนตัว"
+    function accessPrivateDocument() {
+        // ปิดแถบเมนูก่อนเพื่อความสวยงาม
+        toggleQuickMenu(false);
+        
+        // ดีเลย์เล็กน้อยเพื่อให้เมนูปิดเสร็จแล้วค่อยแสดง Pop-up alert
+        setTimeout(() => {
+            alert("ขออภัยด้วยครับ กรุณาใช้ Gmail ของ องค์กร Mahidol.ac.th เท่านั้นเพื่อดู เอกสาร เพื่อความปลอดภัย ของข้อมูล ส่วนบุคคล");
+            // นำทางไปยัง Google Drive ลิงก์ที่กำหนดไว้
+            window.location.href = "https://drive.google.com/drive/folders/1vscA8M13Koh3zu_OLNHTZ4zoHv6X3hLa";
+        }, 350);
     }
 
     // ฟังก์ชันยิงพลุ
