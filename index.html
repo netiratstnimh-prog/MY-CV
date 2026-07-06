@@ -11,7 +11,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Prompt:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Prompt:wght=200;300;400;500;600;700&display=swap" rel="stylesheet">
 
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
@@ -42,7 +42,7 @@
         animation: ekg-flow 3.5s linear infinite;
     }
 
-    /* ลูกเล่นกระดิ่งสั่น / เบอร์โทรศัพท์ */
+    /* ลูกเล่นกระดิ่งสั่น (ใช้เฉพาะในเมนู 3 ขีด และหน้าขอบคุณ) */
     @keyframes bell-ring {
         0%, 100% { transform: rotate(0); }
         5%, 15%, 25% { transform: rotate(8deg); }
@@ -211,7 +211,7 @@
                 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-3 mt-2 border-t border-slate-50 text-xs text-slate-600">
                     <div><strong><i class="fa-solid fa-user-doctor text-slate-400 mr-1.5"></i>ตำแหน่ง:</strong> Practical Nurse (PN)</div>
-                    <div class="ring-animation"><strong><i class="fa-solid fa-phone text-slate-400 mr-1.5"></i>สายตรง:</strong> 063-5164271 / 062-4627516</div>
+                    <div><strong><i class="fa-solid fa-phone text-slate-400 mr-1.5"></i>สายตรง:</strong> 063-5164271 / 062-4627516</div>
                     <div><strong><i class="fa-solid fa-envelope text-slate-400 mr-1.5"></i>เมลงาน:</strong> netirat.nim@mahidol.ac.th</div>
                     <div><strong><i class="fa-solid fa-location-dot text-slate-400 mr-1.5"></i>พื้นที่สะดวก:</strong> กรุงเทพมหานคร</div>
                 </div>
@@ -519,7 +519,6 @@
         guide.classList.add('opacity-0');
         guide.querySelector('div').classList.add('scale-95');
         setTimeout(() => {
-            guide.hidden = true;
             guide.classList.add('hidden');
         }, 500);
     }
@@ -551,7 +550,6 @@
 
     // ระบบคุมชุดควบคุม Modals ทั่วไป
     function openModal(id) {
-        // ปิดเมนู 3 ขีดก่อนเพื่อความสมูทหากเปิดมาจากตรงนั้น
         toggleQuickMenu(false);
         const targetModal = document.getElementById(`modal-${id}`);
         targetModal.classList.remove('hidden');
@@ -569,7 +567,7 @@
         }, 300);
     }
 
-    // ฟังก์ชันยิงพลุ (ดูหรูหรา ไม่เด็กเกินไป)
+    // ฟังก์ชันยิงพลุ
     function launchElegantFirefoam() {
         const duration = 2 * 1000;
         const animationEnd = Date.now() + duration;
@@ -587,7 +585,6 @@
             }
 
             const particleCount = 30 * (timeLeft / duration);
-            // ยิงจากฝั่งซ้ายและขวาเข้ามาตรงกลางอย่างประณีต
             confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
             confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
         }, 250);
@@ -595,13 +592,11 @@
 
     // จัดการระบบเมื่อกดส่งข้อความ (Submit Form)
     function handleFormSubmit(event) {
-        event.preventDefault(); // ป้องกันการเปลี่ยนหน้าของเบราว์เซอร์เดิม
+        event.preventDefault();
         
-        // ฟอร์มส่งไป Formspree ผ่านเบื้องหลัง (AJAX) เพื่อเอาใจระบบ popup ของเรา
         const form = event.target;
         const data = new FormData(form);
         
-        // แสดงป๊อปอัพขอบคุณ และยิงพลุทันทีเพื่อไม่ให้ผู้ใช้งานรอนาน
         const successModal = document.getElementById('modal-success');
         successModal.classList.remove('hidden');
         setTimeout(() => {
@@ -610,7 +605,6 @@
             launchElegantFirefoam();
         }, 50);
 
-        // ยิงข้อมูลเข้าเซิร์ฟเวอร์แบบ asynchronous
         fetch("https://formspree.io/f/xkolenpg", {
             method: "POST",
             body: data,
