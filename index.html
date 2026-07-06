@@ -5,15 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>พอร์ตโฟลิโอ & CV - เนติราช นิ่มเจริญวัฒนกุล</title>
 
-<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <meta name="description" content="กดลิงก์เพื่อดูข้อมูลพอร์ตโฟลิโอและประวัติการทำงานของ เนติราช นิ่มเจริญวัฒนกุล (เน)">
+    <meta property="og:title" content="CV - Netirat Nimcharoenwatnakul">
+    <meta property="og:description" content="👉 กดลิงก์เพื่อดูข้อมูลเพิ่มเติมที่นี่ครับ 👈">
+    <meta property="og:type" content="website">
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Prompt:wght=200;300;400;500;600;700&display=swap" rel="stylesheet">
-
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;500;600&family=Prompt:wght=200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 <style>
     body {
@@ -42,7 +44,7 @@
         animation: ekg-flow 3.5s linear infinite;
     }
 
-    /* ลูกเล่นกระดิ่งสั่น (ใช้เฉพาะในเมนู 3 ขีด และหน้าขอบคุณ) */
+    /* ลูกเล่นกระดิ่งสั่น */
     @keyframes bell-ring {
         0%, 100% { transform: rotate(0); }
         5%, 15%, 25% { transform: rotate(8deg); }
@@ -94,7 +96,7 @@
         </div>
 
         <div id="splash-text-2" class="text-slate-400 text-sm font-light opacity-0 transition-all duration-500">
-            กรุณารอสักครู่นะค้าบ😊
+            กรุณารอสักครู่ครับ 😊
         </div>
 
         <div id="splash-ekg-box" class="hidden flex flex-col items-center space-y-3 transform scale-95 transition-all duration-500">
@@ -154,7 +156,7 @@
             <div class="space-y-3">
                 <button onclick="accessPrivateDocument()" class="flex items-center space-x-3 p-3 bg-blue-50 text-blue-800 hover:bg-blue-100/80 rounded-xl transition font-medium text-sm w-full text-left">
                     <span class="w-8 h-8 bg-blue-600 text-white rounded-lg flex items-center justify-center"><i class="fa-solid fa-file-shield text-xs"></i></span>
-                    <span>เอกสารส่วนตัวตอนนี้</span>
+                    <span>เอกสารส่วนตัว</span>
                 </button>
 
                 <a href="tel:0635164271" class="ring-animation flex items-center space-x-3 p-3 bg-emerald-50 text-emerald-700 hover:bg-emerald-100/80 rounded-xl transition font-medium text-sm w-full">
@@ -194,7 +196,7 @@
         </div>
         
         <div class="text-[11px] text-slate-400 border-t border-slate-100 pt-4 text-center">
-            ระบบข้อมูลเฉพาะ ·@ NETIRAT
+            ระบบจัดการข้อมูลสารสนเทศส่วนบุคคล · NETIRAT
         </div>
     </div>
 </div>
@@ -479,7 +481,6 @@
 
 <div id="modal-private-doc" class="fixed inset-0 bg-slate-950/40 backdrop-blur-xs z-50 hidden opacity-0 transition-opacity duration-300 flex justify-center items-center px-4">
     <div class="bg-white rounded-3xl p-6 max-w-sm w-full shadow-2xl space-y-5 text-center transform scale-95 transition-transform duration-300 border border-blue-50 relative">
-        
         <button onclick="closeModal('private-doc')" class="absolute top-4 right-4 w-8 h-8 rounded-full hover:bg-slate-100 text-slate-400 hover:text-slate-600 flex items-center justify-center transition-colors cursor-pointer" title="ปิดหน้าต่าง">
             <i class="fa-solid fa-xmark text-sm"></i>
         </button>
@@ -489,7 +490,7 @@
         </div>
         
         <div class="space-y-2">
-            <h3 class="font-bold text-slate-800 text-base">เเจ้งเตือนสำหรับผู้ใช้งาน</h3>
+            <h3 class="font-bold text-slate-800 text-base">ระบบรักษาความปลอดภัยข้อมูล</h3>
             <p class="text-xs text-slate-600 leading-relaxed font-medium">
                 กรุณารอ 1-5 นาที เพื่อดูเอกสาร หรือ หากท่านใช้ <span class="text-blue-600 font-bold">Domain Mahidol.ac.th</span> สามารถเข้าดูได้ทันที ขออภัยในความไม่สะดวกครับ ☺️
             </p>
@@ -507,11 +508,10 @@
 </div>
 
 <footer class="bg-white border-t border-slate-100 py-6 mt-16 text-center text-[11px] font-medium text-slate-400 tracking-wider">
-    จัดทำโดย netirat@2026 PN ·ห้ามนำข้อมูลไปเผยเเพร่โดยไม่ได้รับอนุญาติ
+    จัดทำโดย netirat@2026 PN · สงวนลิขสิทธิ์ข้อมูลตามนโยบายองค์กร
 </footer>
 
 <script>
-    // ควบคุมลำดับการทำงานของหน้า Splash Screen
     window.addEventListener('DOMContentLoaded', () => {
         const splashIcon = document.getElementById('splash-icon-box');
         const splashTxt2 = document.getElementById('splash-text-2');
@@ -539,7 +539,6 @@
         }, 5000);
     });
 
-    // เปิด-ปิด ป๊อปอัพแนะนำการใช้งาน
     function openGuide() {
         const guide = document.getElementById('guide-popup');
         guide.classList.remove('hidden');
@@ -557,7 +556,6 @@
         }, 500);
     }
 
-    // ระบบเปิด/ปิด แถบเมนูด่วนด้านข้าง (3 ขีด)
     function toggleQuickMenu(open) {
         const menu = document.getElementById('quick-menu');
         const content = document.getElementById('quick-menu-content');
@@ -574,7 +572,6 @@
         }
     }
 
-    // ดรอปดาวน์อีเมลในแถบเมนู 3 ขีด
     function toggleEmailDropdown() {
         const dropdown = document.getElementById('email-dropdown');
         const chevron = document.getElementById('email-chevron');
@@ -582,7 +579,6 @@
         chevron.classList.toggle('rotate-180');
     }
 
-    // ระบบคุมชุดควบคุม Modals ทั่วไป
     function openModal(id) {
         toggleQuickMenu(false);
         const targetModal = document.getElementById(`modal-${id}`);
@@ -601,17 +597,14 @@
         }, 300);
     }
 
-    // ฟังก์ชันสำหรับเมนู "เอกสารส่วนตัว"
     function accessPrivateDocument() {
         openModal('private-doc');
     }
 
-    // นำทางไปยัง Google Drive ลิงก์เอกสารส่วนตัว
     function redirectToDrive() {
         window.location.href = "https://drive.google.com/drive/folders/1vscA8M13Koh3zu_OLNHTZ4zoHv6X3hLa";
     }
 
-    // ฟังก์ชันยิงพลุ
     function launchElegantFirefoam() {
         const duration = 2 * 1000;
         const animationEnd = Date.now() + duration;
@@ -634,14 +627,12 @@
         }, 250);
     }
 
-    // จัดการระบบเมื่อกดส่งข้อความ (Submit Form)
     function handleFormSubmit(event) {
         event.preventDefault();
-        
         const form = event.target;
         const data = new FormData(form);
-        
         const successModal = document.getElementById('modal-success');
+        
         successModal.classList.remove('hidden');
         setTimeout(() => {
             successModal.classList.remove('opacity-0');
