@@ -3,246 +3,357 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Practical Nurse Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Premium Practical Nurse Profile</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     
     <style>
-        /* --- ตั้งค่าเริ่มต้น & คุมโทนสีการแพทย์ --- */
+        /* --- 1. THEME VARIABLES (คุมโทนสีการแพทย์ระดับไฮเอนด์) --- */
         :root {
-            --primary-color: #0d6efd; /* สีฟ้าการแพทย์ */
-            --dark-medical: #1e293b;  /* สีกรมท่าเข้ม ดูน่าเชื่อถือ */
-            --bg-light: #f8fafc;      /* สีพื้นหลังขาวสะอาด */
-            --text-main: #334155;     /* สีตัวอักษร */
-            --transition: all 0.3s ease;
+            --primary: #00a896;       /* สีเขียวมิ้นต์/ฟ้าการแพทย์ ดูสะอาด ปลอดภัย */
+            --primary-dark: #028090;  /* สีน้ำเงินทะเลลึก เสริมความน่าเชื่อถือ */
+            --dark-medical: #05668d;  /* สีกรมท่าสว่าง */
+            --bg-gradient: linear-gradient(135deg, #f0fdfa 0%, #e0f2fe 100%);
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --shadow-premium: 0 20px 40px rgba(2, 128, 144, 0.08);
+            --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
+        /* --- 2. RESET & BASE STYLE --- */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Sarabun', sans-serif;
+            font-family: 'Sarabun', 'Inter', sans-serif;
         }
 
         body {
-            background-color: var(--bg-light);
-            color: var(--text-main);
-            padding-top: 80px; /* เว้นพื้นที่ให้ Navbar ด้านบน */
+            background: var(--bg-gradient);
+            min-height: 100vh;
+            color: var(--text-dark);
+            padding-top: 90px;
+            overflow-x: hidden;
         }
 
-        /* --- แถบด้านบน (Navbar) --- */
+        /* --- 3. PREMIUM TOP NAVBAR (แถบด้านบน) --- */
         .navbar {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 70px;
-            background-color: #ffffff;
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            height: 75px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(15px); /* ลูกเล่นกระจกฝ้าหรูหรา */
+            -webkit-backdrop-filter: blur(15px);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 10%;
+            padding: 0 8%;
             z-index: 1000;
-            border-bottom: 3px solid var(--primary-color);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.6);
         }
 
+        /* ลูกเล่นโลโก้ */
         .nav-logo {
-            font-size: 1.4rem;
+            font-size: 1.35rem;
             font-weight: 700;
             color: var(--dark-medical);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            letter-spacing: 0.5px;
         }
 
-        .nav-logo i {
-            color: var(--primary-color);
-            animation: pulse 2s infinite; /* ลูกเล่นหัวใจเต้นที่ไอคอน */
-        }
-
-        /* --- ปุ่มติดต่อด้านบน (Contact Action) --- */
-        .nav-contact {
-            display: flex;
-            gap: 15px;
-        }
-
-        .contact-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 16px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.9rem;
-            transition: var(--transition);
-        }
-
-        .btn-phone {
-            background-color: #e0f2fe;
-            color: #0369a1;
-        }
-
-        .btn-phone:hover {
-            background-color: #0369a1;
-            color: #ffffff;
-            transform: translateY(-2px);
-        }
-
-        .btn-email {
-            background-color: #dcfce7;
-            color: #15803d;
-        }
-
-        .btn-email:hover {
-            background-color: #15803d;
-            color: #ffffff;
-            transform: translateY(-2px);
-        }
-
-        /* --- ส่วนเนื้อหาหลัก (Main Content) --- */
-        .container {
-            max-width: 1000px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-
-        /* การ์ดข้อมูลหลัก */
-        .profile-card {
-            background: #ffffff;
-            border-radius: 16px;
-            padding: 40px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
-            text-align: center;
-            border: 1px solid #e2e8f0;
+        .nav-logo-icon {
             position: relative;
-            overflow: hidden;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 12px rgba(0, 168, 150, 0.3);
         }
 
-        /* ลูกเล่นเส้นแถบสีตกแต่งด้านบนของการ์ด */
-        .profile-card::before {
+        /* ลูกเล่นวงแหวนเต้นรอบไอคอน (Pulse Effect) */
+        .nav-logo-icon::after {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 6px;
-            background: linear-gradient(90deg, var(--primary-color), #38bdf8);
-        }
-
-        .avatar-wrapper {
-            position: relative;
-            width: 130px;
-            height: 130px;
-            margin: 0 auto 20px;
-        }
-
-        .avatar-placeholder {
             width: 100%;
             height: 100%;
-            background-color: #f1f5f9;
+            border: 2px solid var(--primary);
+            border-radius: 12px;
+            animation: ripple 2s infinite ease-out;
+        }
+
+        /* แถบปุ่มติดต่อด้านข้าง */
+        .nav-contact-group {
+            display: flex;
+            gap: 12px;
+        }
+
+        .contact-action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 22px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* ลูกเล่นปุ่มโทร */
+        .btn-call {
+            background: linear-gradient(135deg, #028090 0%, #00a896 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(2, 128, 144, 0.2);
+        }
+
+        .btn-call:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(2, 128, 144, 0.35);
+        }
+
+        /* ลูกเล่นปุ่มอีเมล */
+        .btn-mail {
+            background: white;
+            color: var(--primary-dark);
+            border: 1.5px solid var(--primary);
+        }
+
+        .btn-mail:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(0, 168, 150, 0.25);
+        }
+
+        /* --- 4. MAIN CONTAINER & ANIMATED CARD --- */
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 0 24px;
+        }
+
+        .main-card {
+            background: var(--card-bg);
+            border-radius: 30px;
+            padding: 50px 40px;
+            box-shadow: var(--shadow-premium);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            text-align: center;
+            position: relative;
+            /* ลูกเล่นการ์ดเลื่อนขึ้นตอนโหลดหน้าเว็บ */
+            animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* ลูกเล่นรูปโปรไฟล์/ไอคอนวงการแพทย์แบบล้ำๆ */
+        .profile-avatar-zone {
+            position: relative;
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 25px;
+        }
+
+        .avatar-glow {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #f0fdf4, #e0f2fe);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3rem;
-            color: var(--primary-color);
-            border: 4px solid #ffffff;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            font-size: 3.5rem;
+            color: var(--primary);
+            box-shadow: inset 0 4px 10px rgba(0,0,0,0.05), 0 10px 25px rgba(0, 168, 150, 0.15);
+            border: 4px solid white;
+            transition: var(--transition-smooth);
         }
 
-        .status-badge {
-            background-color: #34d399;
-            color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            display: inline-block;
-            margin-bottom: 15px;
-            font-weight: 500;
+        /* หมุนสัญลักษณ์การแพทย์เบาๆ เมื่อเอาเมาส์มาวางที่การ์ด */
+        .main-card:hover .avatar-glow {
+            transform: scale(1.05) rotate(10deg);
+            color: var(--primary-dark);
         }
 
-        h1 {
+        /* ป้ายสถานะ */
+        .status-pill {
+            background: #dcfce7;
+            color: #166534;
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #bbf7d0;
+        }
+
+        .status-pill i {
+            font-size: 0.7rem;
+            animation: blink 1.5s infinite;
+        }
+
+        /* ข้อความหัวข้อ */
+        .nurse-name {
+            font-size: 2.2rem;
             color: var(--dark-medical);
-            font-size: 2rem;
-            margin-bottom: 5px;
+            font-weight: 700;
+            margin-bottom: 6px;
         }
 
-        .subtitle {
-            color: var(--primary-color);
-            font-size: 1.1rem;
-            font-weight: 500;
-            margin-bottom: 25px;
-            letter-spacing: 0.5px;
+        .nurse-title {
+            font-size: 1.2rem;
+            color: var(--primary);
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 30px;
         }
 
-        .divider {
+        .premium-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin: 35px 0;
+        }
+        .premium-divider::before, .premium-divider::after {
+            content: '';
             height: 1px;
-            background: #e2e8f0;
-            margin: 25px 0;
+            width: 80px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        }
+        .premium-divider i {
+            color: var(--primary);
+            font-size: 0.9rem;
         }
 
-        /* ส่วนข้อมูลรายละเอียด */
+        /* --- 5. GRID CARDS DISPLAY (กล่องข้อมูลสไตล์ใหม่) --- */
         .info-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1xl));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 20px;
             text-align: left;
-            margin-top: 20px;
         }
 
-        .info-item {
-            background-color: #f8fafc;
-            padding: 15px 20px;
-            border-radius: 12px;
-            border-left: 4px solid var(--primary-color);
-            transition: var(--transition);
+        .info-card-item {
+            background: white;
+            padding: 20px 25px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.01);
+            border: 1px solid #f1f5f9;
+            transition: var(--transition-smooth);
         }
 
-        .info-item:hover {
-            transform: translateX(5px);
-            background-color: #f1f5f9;
+        /* ลูกเล่นไอคอนในกล่องข้อมูล */
+        .info-icon-box {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            background: #f0fdfa;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            transition: var(--transition-smooth);
         }
 
-        .info-label {
+        /* ลูกเล่นเมื่อ Hover กล่องข้อมูล */
+        .info-card-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(2, 128, 144, 0.08);
+            border-color: rgba(0, 168, 150, 0.2);
+        }
+
+        .info-card-item:hover .info-icon-box {
+            background: var(--primary);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .info-content .label {
             font-size: 0.85rem;
-            color: #64748b;
-            margin-bottom: 3px;
-        }
-
-        .info-value {
-            font-size: 1.05rem;
-            color: var(--dark-medical);
+            color: var(--text-muted);
             font-weight: 500;
+            margin-bottom: 2px;
         }
 
-        /* --- Animation --- */
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
+        .info-content .value {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            font-weight: 600;
         }
 
-        /* รองรับการแสดงผลบนมือถือ */
-        @media (max-width: 600px) {
+
+        /* --- 6. ANIMATION KEYFRAMES (เบื้องหลังลูกเล่นขยับได้) --- */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes ripple {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(1.4); opacity: 0; }
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* --- 7. RESPONSIVE DESIGN (แสดงผลสวยทุกอุปกรณ์) --- */
+        @media (max-width: 768px) {
             .navbar {
-                padding: 0 5%;
-                height: auto;
-                padding-top: 15px;
-                padding-bottom: 15px;
+                padding: 10px 4%;
                 flex-direction: column;
-                gap: 10px;
+                height: auto;
+                gap: 12px;
             }
             body {
-                padding-top: 120px;
+                padding-top: 140px;
             }
-            .nav-contact {
+            .nav-contact-group {
                 width: 100%;
                 justify-content: center;
             }
-            .profile-card {
-                padding: 25px 15px;
+            .contact-action-btn {
+                padding: 8px 16px;
+                font-size: 0.85rem;
+                flex: 1;
+                justify-content: center;
+            }
+            .main-card {
+                padding: 35px 20px;
+            }
+            .info-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -251,51 +362,84 @@
 
     <nav class="navbar">
         <div class="nav-logo">
-            <i class="fa-solid fa-user-nurse"></i> Practical Nurse
+            <div class="nav-logo-icon">
+                <i class="fa-solid fa-user-nurse"></i>
+            </div>
+            <span>Practical Nurse</span>
         </div>
-        <div class="nav-contact">
-            <a href="tel:0123456789" class="contact-btn btn-phone">
-                <i class="fa-solid fa-phone"></i> โทรติดต่อ
+        
+        <div class="nav-contact-group">
+            <a href="tel:0123456789" class="contact-action-btn btn-call">
+                <i class="fa-solid fa-phone-flip"></i> <span>โทรติดต่อด่วน</span>
             </a>
-            <a href="mailto:yourmail@email.com?subject=ติดต่อจากหน้าเว็บพยาบาล" class="contact-btn btn-email">
-                <i class="fa-solid fa-envelope"></i> ส่งอีเมล
+            <a href="mailto:nurse.care@email.com?subject=ติดต่อประสานงานด้านการพยาบาล" class="contact-action-btn btn-mail">
+                <i class="fa-solid fa-envelope-open-text"></i> <span>ส่งอีเมล</span>
             </a>
         </div>
     </nav>
 
     <div class="container">
-        <div class="profile-card">
+        <div class="main-card">
             
-            <div class="avatar-wrapper">
-                <div class="avatar-placeholder">
+            <div class="profile-avatar-zone">
+                <div class="avatar-glow">
                     <i class="fa-solid fa-heart-pulse"></i>
                 </div>
             </div>
 
-            <span class="status-badge"><i class="fa-solid fa-circle-check"></i> พร้อมปฏิบัติงาน</span>
+            <div class="status-pill">
+                <i class="fa-solid fa-circle"></i> พร้อมให้บริการพยาบาล
+            </div>
             
-            <h1>ชื่อ - นามสกุลของคุณ</h1>
-            <p class="subtitle">พยาบาลเทคนิค (Practical Nurse)</p>
+            <h1 class="nurse-name">คุณพยาบาล ใจดีมีสุข</h1>
+            <p class="nurse-title">พยาบาลเทคนิคประจำการ (Practical Nurse)</p>
             
-            <div class="divider"></div>
+            <div class="premium-divider">
+                <i class="fa-solid fa-stethoscope"></i>
+            </div>
 
             <div class="info-grid">
-                <div class="info-item">
-                    <div class="info-label"><i class="fa-solid fa-address-card"></i> ข้อมูลการติดต่อหลัก</div>
-                    <div class="info-value">เบอร์โทร: 012-3456789</div>
+                
+                <div class="info-card-item">
+                    <div class="info-icon-box">
+                        <i class="fa-solid fa-mobile-screen-button"></i>
+                    </div>
+                    <div class="info-content">
+                        <div class="label">เบอร์โทรศัพท์ติดต่อ</div>
+                        <div class="value">012-345-6789</div>
+                    </div>
                 </div>
-                <div class="info-item">
-                    <div class="info-label"><i class="fa-solid fa-envelope-open-text"></i> อีเมล</div>
-                    <div class="info-value">yourmail@email.com</div>
+
+                <div class="info-card-item">
+                    <div class="info-icon-box">
+                        <i class="fa-solid fa-at"></i>
+                    </div>
+                    <div class="info-content">
+                        <div class="label">ที่อยู่อีเมล (Email)</div>
+                        <div class="value">nurse.care@email.com</div>
+                    </div>
                 </div>
-                <div class="info-item">
-                    <div class="info-label"><i class="fa-solid fa-graduation-cap"></i> ตำแหน่ง/วิชาชีพ</div>
-                    <div class="info-value">Practical Nurse (PN)</div>
+
+                <div class="info-card-item">
+                    <div class="info-icon-box">
+                        <i class="fa-solid fa-briefcase-medical"></i>
+                    </div>
+                    <div class="info-content">
+                        <div class="label">สายงานวิชาชีพ</div>
+                        <div class="value">พยาบาลเทคนิค (PN)</div>
+                    </div>
                 </div>
-                <div class="info-item">
-                    <div class="info-label"><i class="fa-solid fa-hospital-user"></i> วัตถุประสงค์</div>
-                    <div class="info-value">พร้อมให้บริการดูแลและพยาบาลอย่างมืออาชีพ</div>
+
+                <div class="info-card-item">
+                    <div class="info-icon-box">
+                        <i class="fa-solid fa-notes-medical"></i>
+                    </div>
+                    <div class="info-content">
+                        <div class="label">เป้าหมายการทำงาน</div>
+                        <div class="value">ดูแลผู้ป่วยด้วยหัวใจและความเป็นมืออาชีพ</div>
+                    </div>
                 </div>
+
             </div>
 
         </div>
